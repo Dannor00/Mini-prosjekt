@@ -27,6 +27,12 @@ I dette prosjektet skal vi:
     ```bash
     git clone --recurse-submodules git@github.com:Dannor00/Mini-prosjekt.git
     ```
+   Ved .zip nedlasting, er det nødvendig å kjøre:
+  
+    ```bash
+      git submodule update --init --recursive
+    ```
+   inne i repo folderen for å laste ned qube_driver filene.
 
 2. Åpne en terminal og installer nødvendige ROS2-pakker:
 
