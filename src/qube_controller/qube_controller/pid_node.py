@@ -1,6 +1,7 @@
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import JointState
+from rcl_interfaces.msg import SetParametersResult
 from pid_controller_msgs.srv import SetReference
 from std_msgs.msg import Float64, Float64MultiArray
 import math
@@ -10,9 +11,9 @@ class PIDControllerNode(Node):
         super().__init__('pid_controller_node')
 
         # PID-parametre
-        self.declare_parameter('kp', 6.0)
-        self.declare_parameter('ki', 0.5)
-        self.declare_parameter('kd', 1.0)
+        self.declare_parameter('kp', 1.0)
+        self.declare_parameter('ki', 0.0)
+        self.declare_parameter('kd', 0.0)
 
         self.kp = self.get_parameter('kp').get_parameter_value().double_value
         self.ki = self.get_parameter('ki').get_parameter_value().double_value
@@ -24,6 +25,8 @@ class PIDControllerNode(Node):
         self.error_sum = 0.0
         self.prev_error = 0.0
         self.target_position = 0.0  # ønsket vinkel
+        
+        self.add_on_set_parameters_callback(self.parameter_callback)
         
        # Abonnerer på /reference for å sette ny ønsket vinkel
         self.srv = self.create_service(SetReference, 'set_reference', self.set_reference_callback)
@@ -41,7 +44,24 @@ class PIDControllerNode(Node):
             '/velocity_controller/commands',
             10)
 
-        self.get_logger().info("PID controller node started")
+        self.get_logger().info("PID controller node har startet")
+        
+    def parameter_callback(self, params):
+        for param in params:
+            if param.name == 'kp':
+                if (param.value >= 0.0):
+                    self.kp = param.value
+                    self.get_logger().info(f' kp er satt til: {self.kp}')
+            if param.name == 'ki':
+                if (param.value >= 0.0):
+                    self.ki = param.value
+                    self.get_logger().info(f' ki er satt til: {self.ki}')
+            if param.name == 'kd':
+                if (param.value >= 0.0):
+                    self.kd = param.value
+                    self.get_logger().info(f' kd er satt til: {self.kd}')
+                    
+        return SetParametersResult(successful=True)
         
     def set_reference_callback(self, request, response):
         if -math.pi <= request.request <= math.pi:
@@ -51,7 +71,8 @@ class PIDControllerNode(Node):
         else:
             self.get_logger().warn(f"Ugyldig referanseverdi: {request.request:.2f}")
             response.success = False
-        return response   
+            
+        return response
 
     def joint_state_callback(self, msg):
         if not msg.position:
