@@ -101,7 +101,7 @@ Hvis du kun vil kjøre simulering og visualisering av PID-kontrolleren:
 
 ---
 
-## Oppdatere PID-verdier
+## Oppdatere PID-verdier Permanent
 
 1. Gå til:
 
