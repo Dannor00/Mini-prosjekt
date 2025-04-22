@@ -11,7 +11,11 @@ I dette prosjektet skal vi:
 ---
 ## Mappestruktur
 
-<pre lang="bash"><code>Mini-prosjekt-main/ └── src/ ├── <b>qube_description/</b> # Geometrisk beskrivelse av Quben (URDF/XACRO) ├── <b>qube_driver/</b> # Hardware interface (ROS 2 Control mot ekte Qube) ├── <b>qube_bringup/</b> # Launch- og konfigurasjonsfiler ├── <b>qube_controller/</b> # PID-regulator som bruker /joint_states └── <b>pid_controller_msgs/</b> # Egendefinert service for referanseverdi (SetReference.srv) </code></pre>
+<pre lang="bash"><code>Mini-prosjekt-main/ └── src/ ├── <b>qube_description/</b> # Geometrisk beskrivelse av Quben (URDF/XACRO)
+    ├── <b>qube_driver/</b> # Hardware interface (ROS 2 Control mot ekte Qube) 
+    ├── <b>qube_bringup/</b> # Launch- og konfigurasjonsfiler 
+    ├── <b>qube_controller/</b> # PID-regulator som bruker /joint_states 
+    └── <b>pid_controller_msgs/</b> # Egendefinert service for referanseverdi (SetReference.srv) </code></pre>
 
 
 
