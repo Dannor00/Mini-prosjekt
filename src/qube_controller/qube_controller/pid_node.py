@@ -10,15 +10,15 @@ class PIDControllerNode(Node):
         super().__init__('pid_controller_node')
 
         # PID-parametre
-        self.declare_parameter('kp', 0.5)
-        self.declare_parameter('ki', 0.0)
-        self.declare_parameter('kd', 0.1)
+        self.declare_parameter('kp', 6.0)
+        self.declare_parameter('ki', 0.5)
+        self.declare_parameter('kd', 1.0)
 
         self.kp = self.get_parameter('kp').get_parameter_value().double_value
         self.ki = self.get_parameter('ki').get_parameter_value().double_value
         self.kd = self.get_parameter('kd').get_parameter_value().double_value
 
-        self.get_logger().info(f"✅ Bruker PID-parametre: Kp={self.kp}, Ki={self.ki}, Kd={self.kd}")
+        self.get_logger().info(f"Bruker PID-parametre: Kp={self.kp}, Ki={self.ki}, Kd={self.kd}")
 
         self.dt = 0.01
         self.error_sum = 0.0
@@ -46,10 +46,10 @@ class PIDControllerNode(Node):
     def set_reference_callback(self, request, response):
         if -math.pi <= request.request <= math.pi:
             self.target_position = request.request
-            self.get_logger().info(f"✅ Ny referanseverdi satt til: {self.target_position:.2f} rad")
+            self.get_logger().info(f"Ny referanseverdi satt til: {self.target_position:.2f} rad")
             response.success = True
         else:
-            self.get_logger().warn(f"❌ Ugyldig referanseverdi: {request.request:.2f}")
+            self.get_logger().warn(f"Ugyldig referanseverdi: {request.request:.2f}")
             response.success = False
         return response   
 

@@ -21,6 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             'pid_node = qube_controller.pid_node:main',
+            'reference_input_node = qube_controller.reference_input_node:main',
         ],
     },
 )
