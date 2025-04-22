@@ -11,11 +11,12 @@ I dette prosjektet skal vi:
 ---
 ## Mappestruktur
 
-<pre lang="bash"><code>Mini-prosjekt-main/ └── src/ ├── <b>qube_description/</b> # Geometrisk beskrivelse av Quben (URDF/XACRO)
-    ├── <b>qube_driver/</b> # Hardware interface (ROS 2 Control mot ekte Qube) 
-    ├── <b>qube_bringup/</b> # Launch- og konfigurasjonsfiler 
-    ├── <b>qube_controller/</b> # PID-regulator som bruker /joint_states 
-    └── <b>pid_controller_msgs/</b> # Egendefinert service for referanseverdi (SetReference.srv) </code></pre>
+<pre lang="bash"><code>Mini-prosjekt-main/└── src/ ├── <b>qube_description/</b> # Geometrisk beskrivelse av Quben (URDF/XACRO)
+                            ├── <b>qube_driver/</b> # Hardware interface (ROS 2 Control mot ekte Qube) 
+                            ├── <b>qube_bringup/</b> # Launch- og konfigurasjonsfiler 
+                            ├── <b>qube_controller/</b> # PID-regulator som bruker /joint_states 
+                            └── <b>pid_controller_msgs/</b> # Egendefinert service for referanseverdi (SetReference.srv) </code></pre> 
+                                         
 
 
 
@@ -24,7 +25,7 @@ I dette prosjektet skal vi:
 1. Last ned prosjektet som `.zip` eller via Git:
 
     ```bash
-    git clone <repo-url>
+    git clone git@github.com:Dannor00/Mini-prosjekt.git
     ```
 
 2. Åpne en terminal og installer nødvendige ROS2-pakker:
@@ -33,14 +34,12 @@ I dette prosjektet skal vi:
     sudo apt install -y ros-jazzy-ros2-control ros-jazzy-ros2-controllers
     ```
 
-3. Gå til `Mini-prosjekt-main/src/qube_bringup/launch` og rediger `bringup.launch.py`.  
-   Endre linje 13 fra:
+3. Gå til `Mini-prosjekt-main/src/qube_bringup/launch` og rediger `bringup.launch.py` om nødvendig.  
+   Endre linje 13 og 20 til:
 
     ```python
-    f'source ~/qube_ws/install/setup.bash && '
+    f'source ~/<path_to_repo>/Mini-prosjekt/install/setup.bash && '
     ```
-
-    til din egen filsti.
 
 4. Åpne en terminal og bygg prosjektet:
 
@@ -82,7 +81,7 @@ I dette prosjektet skal vi:
 
     Husk å bytte ut `ttyACM0` med riktig port.
 
-10. Nå skal du kunne sette en ny referanseverdi via GUI, terminal eller RViz.
+10. Nå skal du kunne sette en ny referanseverdi via terminal eller rqt ved å endre verdien i service "/set_refernece".
 
 ---
 
@@ -133,9 +132,9 @@ Hvis du kun vil kjøre simulering og visualisering av PID-kontrolleren:
 om du vil bare teste ulike PID parmaneter vil vi heller anbefale at du tester med:
 
 ```bash
-ros2 param set
+ros2 param set /pid_controller_node k<ønsket parameter> <en 'dobbel' verdi >= 0>
 ```
 for de ulike parameterne.  
 
-
- 
+#NB!
+Optimale PID-verdier er avhengig om programmet kjører i simuleringmodus eller på fysisk qube. Simulerings verdier vil funger med lave PID-verdier, mens fysisk qube behøver høyere PID-verdier for å kunne gi utslag.  
