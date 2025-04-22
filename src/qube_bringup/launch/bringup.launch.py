@@ -10,14 +10,14 @@ import os
 def launch_setup(*args):
     # 🔧 Definere PID-kontroller kommando
     pid_cmd_str = (
-        f'source ~/Qube_ws/Mini-prosjekt/install/setup.bash && '  #     Hvis nødevendig, endre path til setup.bash på denne linjen. Default er ~/Mini-prosjekt/install/setup.bash
+        f'source ~/Mini-prosjekt/install/setup.bash && '  #     Hvis nødevendig, endre path til setup.bash lokasjon på denne linjen. Default er ~/Mini-prosjekt/install/setup.bash
         f'ros2 run qube_controller pid_node '
     )
     pid_cmd = ['gnome-terminal', '--', 'bash', '-c', pid_cmd_str]
     
     # 🔧Definere Input-node
     input_cmd_str = (
-        'source ~/Qube_ws/Mini-prosjekt/install/setup.bash &&' #     Hvis nødevendig, endre path til setup.bash på denne linjen. Default er ~/Mini-prosjekt/install/setup.bash
+        'source ~/Mini-prosjekt/install/setup.bash &&' #     Hvis nødevendig, endre path til setup.bash lokasjon på denne linjen. Default er ~/Mini-prosjekt/install/setup.bash
         'ros2 run qube_controller reference_input_node; exec bash'
     )
     input_cmd = ['gnome-terminal', '--', 'bash', '-c', input_cmd_str]
