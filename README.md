@@ -101,7 +101,7 @@ Hvis du kun vil kjøre simulering og visualisering av PID-kontrolleren:
 
 ---
 
-## Oppdatere PID-verdier Permanent
+## Oppdatere PID-verdier i kildekoden
 
 1. Gå til:
 
@@ -121,7 +121,12 @@ Hvis du kun vil kjøre simulering og visualisering av PID-kontrolleren:
 
 ---
 
-   
+om du vil bare teste ulike PID parmaneter vil vi heller anbefale at du tester med:
+
+```bash
+ros2 param set
+```
+for de ulike parameterne.  
 
 
  
