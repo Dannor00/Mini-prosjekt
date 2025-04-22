@@ -9,6 +9,16 @@ I dette prosjektet skal vi:
 - Styre vinkel via en terminal og/eller GUI  
 
 ---
+## Mappestruktur
+Mini-prosjekt-main/
+└── src/
+    ├── qube_description/      # Geometrisk beskrivelse (URDF/XACRO)
+    ├── qube_driver/           # Hardware interface (ROS 2 Control)
+    ├── qube_bringup/          # Launch- og konfigurasjonsfiler
+    ├── qube_controller/       # PID-regulator
+    └── pid_controller_msgs/   # Custom service (SetReference)
+
+
 
 ## Hvordan få prosjektet til å kjøre
 
