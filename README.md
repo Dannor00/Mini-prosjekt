@@ -25,7 +25,7 @@ I dette prosjektet skal vi:
 1. Last ned prosjektet som `.zip` eller via Git:
 
     ```bash
-    git clone git@github.com:Dannor00/Mini-prosjekt.git
+    git clone --recurse-submodules git@github.com:Dannor00/Mini-prosjekt.git
     ```
 
 2. Åpne en terminal og installer nødvendige ROS2-pakker:
